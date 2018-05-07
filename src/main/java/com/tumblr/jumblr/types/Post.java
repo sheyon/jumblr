@@ -60,8 +60,9 @@ public class Post extends Resource {
     private String source_title;
     private Boolean liked;
     private String slug;
-    private Long reblogged_from_id;
-    private String reblogged_from_name;
+    private Long reblogged_from_id, reblogged_root_id;
+    private String reblogged_from_url, reblogged_from_name, reblogged_from_title;
+    private String reblogged_root_url, reblogged_root_name, reblogged_root_title;
     private Long note_count;
     private List<Note> notes;
 
@@ -123,7 +124,7 @@ public class Post extends Resource {
 
     /**
      * Get the current state for this post
-     * @return the state
+     * @return the state; if set, one of `published`, `queued`, `draft`, or `private`
      */
     public String getState() {
         return state;
@@ -240,6 +241,48 @@ public class Post extends Resource {
     }
 
     /**
+     * @return the url for the post that this post reblogged.
+     */
+    public String getRebloggedFromUrl() {
+        return reblogged_from_url;
+    }
+
+    /**
+     * @return the title for the post that this post reblogged.
+     */
+    public String getRebloggedFromTitle() {
+        return reblogged_from_title;
+    }
+
+    /**
+     * @return the root id for the post that this post reblogged.
+     */
+    public Long getRebloggedRootId() {
+        return reblogged_root_id;
+    }
+
+    /**
+     * @return the root url for the post that this post reblogged.
+     */
+    public String getRebloggedRootUrl() {
+        return reblogged_root_url;
+    }
+
+    /**
+     * @return the root name for the post that this post reblogged.
+     */
+    public String getRebloggedRootName() {
+        return reblogged_root_name;
+    }
+
+    /**
+     * @return the root title for the post that this post reblogged.
+     */
+    public String getRebloggedRootTitle() {
+        return reblogged_root_title;
+    }
+
+    /**
      * Get the notes on this post. You must set "notes_info" to "true" in the
      * options map for this to work.
      * @return a copy of the array of the notes on this post
@@ -309,6 +352,7 @@ public class Post extends Resource {
 
     /**
      * Set the slug
+     * @param slug the post url slug
      */
     public void setSlug(String slug) {
         this.slug = slug;
@@ -334,7 +378,8 @@ public class Post extends Resource {
 
     /**
      * Set the state for this post
-     * @param state the state
+     * @param state the state; one of `published`, `queued`, `draft`, or `private`.
+     *  Tumblr API defaults to `published` if not specified.
      */
     public void setState(String state) {
         this.state = state;
@@ -342,6 +387,7 @@ public class Post extends Resource {
 
     /**
      * Set the tags for this post
+     * @param tags the tags
      */
     public void setTags(List<String> tags) {
         this.tags = tags;
@@ -349,6 +395,7 @@ public class Post extends Resource {
 
     /**
      * Add a tag
+     * @param tag the tag
      */
     public void addTag(String tag) {
         if (this.tags == null) {
@@ -359,6 +406,7 @@ public class Post extends Resource {
 
     /**
      * Remove a tag
+     * @param tag the tag
      */
     public void removeTag(String tag) {
         this.tags.remove(tag);
@@ -366,6 +414,7 @@ public class Post extends Resource {
 
     /**
      * Save this post
+     * @throws IOException if a file in detail cannot be read
      */
     public void save() throws IOException {
         if (id == null) {
