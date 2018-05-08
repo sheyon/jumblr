@@ -1,0 +1,9 @@
+apply plugin: 'java-library'
+
+dependencies {
+    implementation 'com.github.scribejava:scribejava-apis:5.4.0'
+    implementation 'com.google.code.gson:gson:2.8.4'
+    testImplementation 'junit:junit:4.12'
+    testImplementation group: 'org.mockito', name: 'mockito-all', version: '1.9.5'
+
+}
