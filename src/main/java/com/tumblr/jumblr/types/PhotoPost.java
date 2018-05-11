@@ -50,7 +50,7 @@ public class PhotoPost extends Post {
      * Return the photo width
      * @return width
      */
-    public Integer getWidth() {
+    public int getWidth() {
         return width;
     }
 
@@ -58,7 +58,7 @@ public class PhotoPost extends Post {
      * Return the photo height
      * @return height
      */
-    public Integer getHeight() {
+    public int getHeight() {
         return height;
     }
 

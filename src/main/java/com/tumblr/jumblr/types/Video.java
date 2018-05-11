@@ -6,14 +6,14 @@ package com.tumblr.jumblr.types;
  */
 public class Video {
 
-    private Integer width;
+    private int width;
     private String embed_code;
 
     /**
      * Get the width of this video
      * @return width
      */
-    public Integer getWidth() {
+    public int getWidth() {
         return width;
     }
 

@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
+import java.util.concurrent.ExecutionException;
+
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -294,7 +296,7 @@ public class Post extends Resource {
     /**
      * Delete this post
      */
-    public void delete() {
+    public void delete() throws InterruptedException, ExecutionException, IOException {
         client.postDelete(blog_name, id);
     }
 
@@ -304,25 +306,25 @@ public class Post extends Resource {
      * @param options options to reblog with (or null)
      * @return reblogged post
      */
-    public Post reblog(String blogName, Map<String, ?> options) {
+    public Post reblog(String blogName, Map<String, ?> options) throws InterruptedException, ExecutionException, IOException {
         return client.postReblog(blogName, id, reblog_key, options);
     }
 
-    public Post reblog(String blogName) {
+    public Post reblog(String blogName) throws InterruptedException, ExecutionException, IOException {
         return this.reblog(blogName, null);
     }
 
     /**
      * Like this post
      */
-    public void like() {
+    public void like() throws InterruptedException, ExecutionException, IOException {
         client.like(this.id, this.reblog_key);
     }
 
     /**
      * Unlike this post
      */
-    public void unlike() {
+    public void unlike() throws InterruptedException, ExecutionException, IOException {
         client.unlike(this.id, this.reblog_key);
     }
 
@@ -416,7 +418,7 @@ public class Post extends Resource {
      * Save this post
      * @throws IOException if a file in detail cannot be read
      */
-    public void save() throws IOException {
+    public void save() throws IOException, ExecutionException, InterruptedException {
         if (id == null) {
             this.id = client.postCreate(blog_name, detail());
         } else {

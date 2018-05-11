@@ -1,7 +1,9 @@
 package com.tumblr.jumblr.types;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 /**
  * This class represents an individual Tumbelog
@@ -13,7 +15,7 @@ public class Blog extends Resource {
     private String title;
     private String description;
     private int posts, likes, followers;
-    private Long updated;
+    private long updated;
     private boolean ask, ask_anon;
 
     /**
@@ -60,7 +62,7 @@ public class Blog extends Resource {
      * Get the time of the most recent post (in seconds since epoch)
      * @return Long of time
      */
-    public Long getUpdated() {
+    public long getUpdated() {
         return updated;
     }
 
@@ -85,11 +87,11 @@ public class Blog extends Resource {
      * @param size the size to get the avatar for
      * @return A string URL for the avatar
      */
-    public String avatar(Integer size) {
+    public String avatar(Integer size) throws InterruptedException, ExecutionException, IOException {
         return client.blogAvatar(this.name, size);
     }
 
-    public String avatar() {
+    public String avatar() throws InterruptedException, ExecutionException, IOException {
         return this.avatar(null);
     }
 
@@ -102,22 +104,22 @@ public class Blog extends Resource {
      * @param options a map of options (or null)
      * @return A List of users
      */
-    public List<User> followers(Map<String, ?> options) {
+    public List<User> followers(Map<String, ?> options) throws InterruptedException, ExecutionException, IOException {
         return client.blogFollowers(this.name, options);
     }
 
-    public List<User> followers() { return this.followers(null); }
+    public List<User> followers() throws InterruptedException, ExecutionException, IOException { return this.followers(null); }
 
     /**
      * Get the posts for this blog
      * @param options a map of options (or null)
      * @return A List of posts
      */
-    public List<Post> posts(Map<String, ?> options) {
+    public List<Post> posts(Map<String, ?> options) throws InterruptedException, ExecutionException, IOException {
         return client.blogPosts(name, options);
     }
 
-    public List<Post> posts() {
+    public List<Post> posts() throws InterruptedException, ExecutionException, IOException {
         return this.posts(null);
     }
 
@@ -126,7 +128,7 @@ public class Blog extends Resource {
      * @param postId the id of the post to retrieve
      * @return the post (or null)
      */
-    public Post getPost(Long postId) {
+    public Post getPost(Long postId) throws InterruptedException, ExecutionException, IOException {
         return client.blogPost(name, postId);
     }
 
@@ -135,23 +137,23 @@ public class Blog extends Resource {
      * @param options a map of options (or null)
      * @return A List of posts
      */
-    public List<Post> likedPosts(Map<String, ?> options) {
+    public List<Post> likedPosts(Map<String, ?> options) throws InterruptedException, ExecutionException, IOException {
         return client.blogLikes(this.name, options);
     }
 
-    public List<Post> likedPosts() { return this.likedPosts(null); }
+    public List<Post> likedPosts() throws InterruptedException, ExecutionException, IOException { return this.likedPosts(null); }
 
     /**
      * Follow this blog
      */
-    public void follow() {
+    public void follow() throws InterruptedException, ExecutionException, IOException {
         client.follow(this.name);
     }
 
     /**
      * Unfollow this blog
      */
-    public void unfollow() {
+    public void unfollow() throws InterruptedException, ExecutionException, IOException {
         client.unfollow(this.name);
     }
 
@@ -160,11 +162,11 @@ public class Blog extends Resource {
      * @param options the options (or null)
      * @return a List of posts
      */
-    public List<Post> queuedPosts(Map<String, ?> options) {
+    public List<Post> queuedPosts(Map<String, ?> options) throws InterruptedException, ExecutionException, IOException {
         return client.blogQueuedPosts(name, options);
     }
 
-    public List<Post> queuedPosts() {
+    public List<Post> queuedPosts() throws InterruptedException, ExecutionException, IOException {
         return this.queuedPosts(null);
     }
 
@@ -173,11 +175,11 @@ public class Blog extends Resource {
      * @param options the options (or null)
      * @return a List of posts
      */
-    public List<Post> draftPosts(Map<String, ?> options) {
+    public List<Post> draftPosts(Map<String, ?> options) throws InterruptedException, ExecutionException, IOException {
         return client.blogDraftPosts(name, options);
     }
 
-    public List<Post> draftPosts() {
+    public List<Post> draftPosts() throws InterruptedException, ExecutionException, IOException {
         return this.draftPosts(null);
     }
 
@@ -186,11 +188,11 @@ public class Blog extends Resource {
      * @param options the options (or null)
      * @return a List of posts
      */
-    public List<Post> submissions(Map<String, ?> options) {
+    public List<Post> submissions(Map<String, ?> options) throws InterruptedException, ExecutionException, IOException {
         return client.blogSubmissions(name, options);
     }
 
-    public List<Post> submissions() {
+    public List<Post> submissions() throws InterruptedException, ExecutionException, IOException {
         return this.submissions(null);
     }
 

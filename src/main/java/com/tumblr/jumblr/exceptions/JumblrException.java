@@ -1,6 +1,8 @@
 package com.tumblr.jumblr.exceptions;
 
 import com.google.gson.*;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +25,7 @@ public class JumblrException extends RuntimeException {
      * Instantiate a new JumblrException given a bad response to wrap
      * @param response the response to wrap
      */
-    public JumblrException(Response response) {
+    public JumblrException(Response response) throws IOException {
         this.responseCode = response.getCode();
         String body = response.getBody();
 

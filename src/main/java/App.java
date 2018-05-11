@@ -1,16 +1,12 @@
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.tumblr.jumblr.JumblrClient;
-import com.tumblr.jumblr.types.Blog;
-import com.tumblr.jumblr.types.PhotoPost;
 import com.tumblr.jumblr.types.Post;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Example usage of Jumblr
@@ -18,7 +14,7 @@ import java.util.Map;
  */
 public class App {
 
-    public static void main(String[] args) throws FileNotFoundException, IOException, InstantiationException, IllegalAccessException {
+    public static void main(String[] args) throws IOException, ExecutionException, InterruptedException {
 
         // Read in the JSON data for the credentials
         FileReader fr = new FileReader("credentials.json");

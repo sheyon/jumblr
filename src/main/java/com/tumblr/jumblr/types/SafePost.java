@@ -1,6 +1,8 @@
 package com.tumblr.jumblr.types;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
+
 
 /**
  * Save Post and not need to raise IOException
@@ -15,9 +17,11 @@ class SafePost extends Post {
     public void save() {
         try {
             super.save();
-        } catch (IOException ex) {
+        }
+        catch (ExecutionException | InterruptedException | IOException ex) {
             // No files involved, no IOException
         }
-    }
+
+     }
 
 }

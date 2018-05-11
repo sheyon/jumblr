@@ -5,6 +5,8 @@ import com.tumblr.jumblr.request.RequestBuilder;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -24,7 +26,7 @@ public class JumblrClientErrorTest {
 
     @SuppressWarnings("unchecked")
     @Before
-    public void setup() throws IOException {
+    public void setup() throws IOException, ExecutionException, InterruptedException {
         builder = mock(RequestBuilder.class);
         client = new JumblrClient("ck", "cs", "@", "@");
         client.setRequestBuilder(builder);
@@ -38,32 +40,32 @@ public class JumblrClientErrorTest {
      */
 
     @Test
-    public void user() {
+    public void user() throws InterruptedException, ExecutionException, IOException {
         thrown.expect(JumblrException.class);
         client.user();
     }
 
     @Test
-    public void userDashboard() {
+    public void userDashboard() throws InterruptedException, ExecutionException, IOException {
         thrown.expect(JumblrException.class);
         client.userDashboard();
     }
 
     @Test
-    public void userFollowing() {
+    public void userFollowing() throws InterruptedException, ExecutionException, IOException {
         thrown.expect(JumblrException.class);
         client.userFollowing();
     }
 
     @Test
-    public void userLikes() {
+    public void userLikes() throws InterruptedException, ExecutionException, IOException {
         thrown.expect(JumblrException.class);
         client.userLikes();
     }
 
     @Test
-    public void like() {
-        Long id = 42L;
+    public void like() throws InterruptedException, ExecutionException, IOException {
+        long id = 42L;
         String reblogKey = "hello";
 
         thrown.expect(JumblrException.class);
@@ -71,8 +73,8 @@ public class JumblrClientErrorTest {
     }
 
     @Test
-    public void unlike() {
-        Long id = 42L;
+    public void unlike() throws InterruptedException, ExecutionException, IOException {
+        long id = 42L;
         String reblogKey = "hello";
 
         thrown.expect(JumblrException.class);
@@ -80,13 +82,13 @@ public class JumblrClientErrorTest {
     }
 
     @Test
-    public void follow() {
+    public void follow() throws InterruptedException, ExecutionException, IOException {
         thrown.expect(JumblrException.class);
         client.follow("hey.com");
     }
 
     @Test
-    public void unfollow() {
+    public void unfollow() throws InterruptedException, ExecutionException, IOException {
         thrown.expect(JumblrException.class);
         client.unfollow("hey.com");
     }
@@ -96,13 +98,13 @@ public class JumblrClientErrorTest {
      */
 
     @Test
-    public void userAvatar() {
+    public void userAvatar() throws InterruptedException, ExecutionException, IOException {
         thrown.expect(JumblrException.class);
         client.blogAvatar("hey.com");
     }
 
     @Test
-    public void blogInfo() {
+    public void blogInfo() throws InterruptedException, ExecutionException, IOException {
         Map<String, String> map = new HashMap<String, String>();
         map.put("api_key", "ck");
 
@@ -111,44 +113,44 @@ public class JumblrClientErrorTest {
     }
 
     @Test
-    public void blogFollowers() {
+    public void blogFollowers() throws InterruptedException, ExecutionException, IOException {
         thrown.expect(JumblrException.class);
         client.blogFollowers("blog_name");
     }
 
     @Test
-    public void blogLikes() {
+    public void blogLikes() throws InterruptedException, ExecutionException, IOException {
         thrown.expect(JumblrException.class);
         client.blogLikes("hey.com");
     }
 
     @Test
-    public void blogPosts() {
+    public void blogPosts() throws InterruptedException, ExecutionException, IOException {
         thrown.expect(JumblrException.class);
         client.blogPosts("hey.com");
     }
 
     @Test
-    public void blogPost() {
-        Long id = 24L;
+    public void blogPost() throws InterruptedException, ExecutionException, IOException {
+        long id = 24L;
         thrown.expect(JumblrException.class);
         client.blogPost("hey.com", id);
     }
 
     @Test
-    public void blogQueuedPosts() {
+    public void blogQueuedPosts() throws InterruptedException, ExecutionException, IOException {
         thrown.expect(JumblrException.class);
         client.blogQueuedPosts("hey.com");
     }
 
     @Test
-    public void blogDraftPosts() {
+    public void blogDraftPosts() throws InterruptedException, ExecutionException, IOException {
         thrown.expect(JumblrException.class);
         client.blogDraftPosts("hey.com");
     }
 
     @Test
-    public void blogSubmissions() {
+    public void blogSubmissions() throws InterruptedException, ExecutionException, IOException {
         thrown.expect(JumblrException.class);
         client.blogSubmissions("hey.com");
     }
@@ -158,13 +160,13 @@ public class JumblrClientErrorTest {
      */
 
     @Test
-    public void postDelete() {
+    public void postDelete() throws InterruptedException, ExecutionException, IOException {
         thrown.expect(JumblrException.class);
         client.postDelete("hey.com", 42L);
     }
 
     @Test
-    public void postReblog() {
+    public void postReblog() throws InterruptedException, ExecutionException, IOException {
         thrown.expect(JumblrException.class);
         client.postReblog("hey.com", 42L, "key");
     }
@@ -174,7 +176,7 @@ public class JumblrClientErrorTest {
      */
 
     @Test
-    public void tagged() {
+    public void tagged() throws InterruptedException, ExecutionException, IOException {
         String tag = "coolio";
 
         thrown.expect(JumblrException.class);

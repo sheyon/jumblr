@@ -2,11 +2,11 @@ package com.tumblr.jumblr.types;
 
 public class Note {
     
-    private Long timestamp;
+    private long timestamp;
     private String blog_name;
     private String blog_url;
     private String type;
-    private Long post_id;
+    private long post_id;
     private String reply_text;
     private String added_text;
 
@@ -15,7 +15,7 @@ public class Note {
      *
      * @return timestamp since the epoch
      */
-    public Long getTimestamp() {
+    public long getTimestamp() {
         return timestamp;
     }
 
@@ -52,7 +52,7 @@ public class Note {
      *
      * @return the ID of the post
      */
-    public Long getPostId() {
+    public long getPostId() {
         return post_id;
     }
 
