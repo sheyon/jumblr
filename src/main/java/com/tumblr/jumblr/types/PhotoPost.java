@@ -13,7 +13,8 @@ import java.util.Map;
 public class PhotoPost extends Post {
 
     private String caption;
-    private Integer width, height;
+    private int width;
+    private int height;
 
     private String link;
     // TODO: Do not leak the photos member variable to world
